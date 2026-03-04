@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text World MVP</title>
+    <style>
+      :root {
+        font-family: Arial, sans-serif;
+        color-scheme: light dark;
+      }
+      body {
+        margin: 0;
+        padding: 1rem;
+        background: #121212;
+        color: #f5f5f5;
+      }
+      .container {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .log-panel {
+        border: 1px solid #3a3a3a;
+        border-radius: 8px;
+        padding: 1rem;
+        min-height: 260px;
+        background: #1b1b1b;
+        margin-bottom: 1rem;
+        overflow-y: auto;
+      }
+      .log-line {
+        margin: 0.35rem 0;
+        white-space: pre-wrap;
+      }
+      form {
+        display: flex;
+        gap: 0.5rem;
+      }
+      input[type="text"] {
+        flex: 1;
+        padding: 0.65rem;
+        border-radius: 6px;
+        border: 1px solid #555;
+      }
+      button {
+        padding: 0.65rem 1rem;
+        border-radius: 6px;
+        border: 1px solid #666;
+        background: #2f6fed;
+        color: white;
+        cursor: pointer;
+      }
+      .hint {
+        margin-top: 0.5rem;
+        color: #bdbdbd;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>本地文字游戏 MVP（Step 0）</h1>
+      <section class="log-panel" aria-label="recent-log">
+        {% for line in logs %}
+        <p class="log-line">{{ line }}</p>
+        {% endfor %}
+      </section>
+
+      <form action="/command" method="post">
+        <input
+          id="command"
+          type="text"
+          name="command"
+          placeholder="输入命令，如 look / help"
+          value="{{ last_command }}"
+          autocomplete="off"
+        />
+        <button type="submit">发送</button>
+      </form>
+      <p class="hint">当前仅提供基础 UI。命令规则将在后续步骤接入。</p>
+    </main>
+  </body>
+</html>
